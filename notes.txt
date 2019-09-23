@@ -15,3 +15,21 @@ DEBUG=express-generator-boilerplate:* npm run devstart (should start the server 
 
 git init
 -----------------------------------------------
+Stage 2
+
+2. npm i body-parser     (will be necessary for parsing req.body)
+    add in app.js (or routers):
+        var bodyParser = require("body-parser");
+        app.use(bodyParser.urlencoded({ extended: 'true' })); // const requestBodyStr = JSON.stringify(req.body);
+
+3 
+ -add partials/header.ejs/footer.ejs with bootstrap 4  & jquery 3
+ - add bootstrap navbar to index.ejs
+4.
+ -add index.js testing jQuery is loaded
+
+3. npm i request         (a wrapper for Fetch interface to handle API requests)
+
+4. add movies.js + movies.ejs + moviesRouter in app.js (how to use request package with OMDB api)
+
+-----------------------------------------------
