@@ -62,3 +62,11 @@ Stage 3
     "attr-no-duplication": true,
     "title-require": true
 }
+
+------------------------------------------
+For mongodb:
+1) install mongodb if not already installed
+2) see cats.js
+3) sudo service mongod start  (starts the demon)
+4) mongo    (starts the shell) or use MongoDb Compass
+5) > show dbs, use <db>, show collections, etc 

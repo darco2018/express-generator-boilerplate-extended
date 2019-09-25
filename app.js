@@ -7,8 +7,8 @@ var bodyParser = require("body-parser");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var moviesRouter = require('./routes/movies');
-
+var moviesRouter = require('./routes/movies'); // api example
+const catsRouter = require('./routes/cats'); // db example
 var app = express();
 
 // view engine setup
@@ -28,6 +28,7 @@ app.use(bodyParser.urlencoded({ extended: 'true' })); // const requestBodyStr = 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/movies', moviesRouter);
+app.use('/cats', catsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
