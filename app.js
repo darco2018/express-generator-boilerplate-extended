@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require("body-parser");
+var methodOverride = require("method-override");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false })); //vs urlencoded for body-parser?!
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride("_method")); //in url: _method=PUT/DELETE
 
 // move to routers?
 app.use(bodyParser.urlencoded({ extended: 'true' })); // const requestBodyStr = JSON.stringify(req.body);
