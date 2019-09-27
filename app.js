@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
+var expressSanitizer = require('express-sanitizer');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -17,14 +19,22 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false })); //vs urlencoded for body-parser?!
+// express.json & express/encoded are only for POST & PUT as you send data object to server
+app.use(express.json()); // for application/json   -> recognizes incoming to server Request Object as JSON Object
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(methodOverride("_method")); //in url: _method=PUT/DELETE
 
-// move to routers?
-app.use(bodyParser.urlencoded({ extended: 'true' })); // const requestBodyStr = JSON.stringify(req.body);
+// extended true allows for rich objects to be sent & arrays to be encoded into urls
+// so if false 1) you can't post "nested object" eg person[name] blog[content]; 
+// but will not filter '?' from query string  ?name=bob  will be { '?name': 'bob'}
+// express.urlencoded recognizes incoming Request Object as string or array
+app.use(express.urlencoded({ extended: true })); // for application/x-www-form-urlencoded
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method')); // in url: _method=PUT/DELETE
+app.use(expressSanitizer());
+
+// body-parser ALTERNATIVE to express.json/urlencoded
+// app.use(bodyParser.urlencoded({ extended: 'true' })); // const requestBodyStr = JSON.stringify(req.body);
+
 
 
 app.use('/', indexRouter);
